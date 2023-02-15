@@ -1,0 +1,16 @@
+name: Lint & Typing
+
+on: [push]
+
+jobs:
+  php-stan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: php-actions/composer@v6
+    
+    - uses: php-actions/phpstan@v3
+      with:
+        path: src/
+        level: 9
