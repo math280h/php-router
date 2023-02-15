@@ -40,18 +40,6 @@ class Router
     }
 
     /**
-     * Add Middleware to Router
-     *
-     * @param string $name
-     * @param Closure $middleware
-     * @return void
-     */
-    public function addMiddleware(string $name, Closure $middleware): void
-    {
-        $this->middlewares[$name] = $middleware;
-    }
-
-    /**
      * Add GET Request to router
      *
      * @param string $path
@@ -75,6 +63,83 @@ class Router
     public function post(string $path, callable|string $callback, array $middleware = []): void
     {
         $this->addRoute(new Route($path, 'POST', $callback, $middleware));
+    }
+
+    /**
+     * Add HEAD Request to router
+     *
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return void
+     */
+    public function head(string $path, callable|string $callback, array $middleware = []): void
+    {
+        $this->addRoute(new Route($path, 'HEAD', $callback, $middleware));
+    }
+
+    /**
+     * Add PUT Request to router
+     *
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return void
+     */
+    public function put(string $path, callable|string $callback, array $middleware = []): void
+    {
+        $this->addRoute(new Route($path, 'PUT', $callback, $middleware));
+    }
+
+    /**
+     * Add DELETE Request to router
+     *
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return void
+     */
+    public function delete(string $path, callable|string $callback, array $middleware = []): void
+    {
+        $this->addRoute(new Route($path, 'DELETE', $callback, $middleware));
+    }
+
+    /**
+     * Add OPTIONS Request to router
+     *
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return void
+     */
+    public function options(string $path, callable|string $callback, array $middleware = []): void
+    {
+        $this->addRoute(new Route($path, 'OPTIONS', $callback, $middleware));
+    }
+
+    /**
+     * Add PATCH Request to router
+     *
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return void
+     */
+    public function patch(string $path, callable|string $callback, array $middleware = []): void
+    {
+        $this->addRoute(new Route($path, 'PATCH', $callback, $middleware));
+    }
+
+    /**
+     * Add Middleware to Router
+     *
+     * @param string $name
+     * @param Closure $middleware
+     * @return void
+     */
+    public function addMiddleware(string $name, Closure $middleware): void
+    {
+        $this->middlewares[$name] = $middleware;
     }
 
     /**
