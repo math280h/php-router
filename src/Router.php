@@ -23,9 +23,24 @@ class Router
      */
     private array $middlewares;
 
-    public function __construct(string $public_directory = "")
+    /**
+     * Create route group
+     *
+     * @param array<string> $attributes
+     * @param array<Route> $routes
+     * @return void
+     */
+    public function group(array $attributes, array $routes): void
     {
-        $this->loadPublic($public_directory);
+        foreach ($routes as $route) {
+            if (array_key_exists("prefix", $attributes)) {
+                $route->path = (!str_starts_with($attributes["prefix"], "/") ? "/" . $attributes["prefix"]:$attributes["prefix"]) . $route->path;
+            }
+            if (array_key_exists("middleware", $attributes)) {
+                $route->middleware[] = $attributes["middleware"];
+            }
+            $this->addRoute($route);
+        }
     }
 
     /**
@@ -140,33 +155,6 @@ class Router
     public function addMiddleware(string $name, Closure $middleware): void
     {
         $this->middlewares[$name] = $middleware;
-    }
-
-    /**
-     * Load resource in public folder
-     *
-     * @param string $public_directory
-     * @return void
-     */
-    private function loadPublic(string $public_directory = ""): void
-    {
-        if ($public_directory === "") {
-            $public_directory = dirname(__DIR__, 2) . '/public';
-        }
-
-        $public_resources = new RecursiveTreeIterator(
-            new RecursiveDirectoryIterator(
-                $public_directory,
-                FilesystemIterator::SKIP_DOTS));
-
-        foreach ($public_resources as $public_resource) {
-            $path = explode('public/', $public_resource)[1];
-            if (!str_ends_with($path, '.php')) {
-                $this->get($path, function() use ($public_resource) {
-                    echo file_get_contents($public_resource);
-                });
-            }
-        }
     }
 
     /**
