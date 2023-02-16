@@ -49,6 +49,26 @@ $router->get('/', MyController::class . '::index')
 $router->post('/', MyController::class . '::index')
 ```
 
+### Route groups
+
+You can group routes together, this allows you to e.g. define a prefix for a colleciton of routes or apply
+middleware to the collection of routes.
+
+You can define a route group like so:
+```php
+use Math280h\PhpRouter\Route;
+
+$router->group(["prefix" => "test"], [
+    Route::get('/1', function () {
+        echo 'Hello World';
+    }),
+    Route::get('/2', function () {
+        echo 'Hello World';
+    }),
+]);
+```
+This example results in two routes with the paths `/test/1` and `/test/2`
+
 ### Adding middleware
 
 The router supports middleware than runs after the connection is accepted but before the request

@@ -84,4 +84,113 @@ class Route
             }
         }
     }
+
+    /**
+     * Route construction
+     */
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function get(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "GET", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function post(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "POST", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function put(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "PUT", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function delete(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "DELETE", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function options(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "OPTIONS", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function head(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "HEAD", $callback, $middleware);
+    }
+
+    /**
+     * @param string $path
+     * @param callable|string $callback
+     * @param array<string> $middleware
+     * @return Route
+     */
+    public static function patch(
+        string $path,
+        callable|string $callback,
+        array $middleware = []
+    ): Route
+    {
+        return new Route($path, "PATCH", $callback, $middleware);
+    }
 }

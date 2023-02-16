@@ -11,7 +11,7 @@ final class RouterTest extends TestCase
 
     public function setUp(): void
     {
-        $path = getcwd() . "/server";
+        $path = getcwd() . "/public";
         $this->process = new Process(["php", "-S", "localhost:8080", "-t", $path]);
         $this->process->start();
 
